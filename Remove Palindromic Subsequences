@@ -1,0 +1,31 @@
+class Solution {
+    public int removePalindromeSub(String s) {
+        if(s.equals(""))return 0;
+        if(ispalindrome(s))return 1;
+        else return 2;
+    }
+   boolean ispalindrome(String s){
+        int i=0;int j=s.length()-1;
+       while(i<=j){
+           if(s.charAt(i)!=s.charAt(j)){
+               return false;
+           }
+           i++;
+           j--;
+       }
+       return true;
+    }
+}
+/*IN QUESTION ITS GIVEN THAT ONLY TWO CHARCATERs, SO WE CAN HAVE MAX OF ANSWER 2 BEACUSE WE ARE 
+REMOVING PALINDROMIC SUBSEQUENCSE OF STRING IT BECOMES EMPTY IN MAX OF 2 STEPS 
+1.IF STRING IS EMPTY STEPS REQUIRED 0
+2.IF STRING IS PALINDROME STEPS TO MAKE EMPTY IS 1
+2.OTHER THAN ABOVE TWO CASES ITS TAKES 2 STEPS TO MAKE OUR STRING EMPTY
+EX:baabbaaaba IT IS NOT PALINDROME WE CAN MAKE IT EMPTY IN 2 STEPS BY REMOVING PALINDROME SEQUENCES 
+ (aabbaa)remove this step 1
+ remaining baba palindrome we remove in step 2
+ ex:"baabb" not a palindrome 
+ step 1: baab (palindrome sequence we remove this)
+ step 2 :b remaining remove it in step 2 
+ so, every non palindrome string as whole can be empty in 2 steps
+*/
