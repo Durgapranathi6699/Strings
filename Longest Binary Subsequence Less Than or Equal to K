@@ -1,0 +1,29 @@
+class Solution {
+    public int longestSubsequence(String s, int k) {
+        boolean stop=false;
+        int j=0;int len=0;int sum=0;
+        for(int i=s.length()-1;i>=0;i--){//traverse from end
+            if(s.charAt(i)=='0'){//if its zero incude it
+            len++;
+            }
+           else if(stop==false &&j<31){//Integer.MAX_VALUE 2^32 ,j starts from 0(to add values of 1's)
+                sum=sum+(int)Math.pow(2,j);
+                  if(sum>k){//sum exceding dont include
+                    stop=true;
+                    sum-=(int)Math.pow(2,j);
+                   }else{//if sum<k  
+                    len++;
+                    }
+              }
+                  j++;
+        }
+        return len;
+    }
+}
+/*our aim is to find longest length with sum<k 
+so take all the zeores and take ones from left so that sum<k is maintained
+ex: "1001010"
+      || | |  00010(ans)included all zeoes and left most one (binary value is <k)
+*/                
+        //        0(2^3)+  0(2^2)+ 1(2^1) +0(2^0)
+        //            j        j       j       j
