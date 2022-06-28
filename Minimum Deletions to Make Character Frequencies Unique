@@ -1,0 +1,28 @@
+class Solution {
+    public int minDeletions(String s) {
+        HashMap<Character,Integer> map=new HashMap<>();
+       char a[]=s.toCharArray();
+       for(int i=0;i<a.length;i++){//store char and its freq
+           if(map.containsKey(a[i])){
+               map.put(a[i],map.get(a[i])+1);
+           }else{
+               map.put(a[i],1);
+           }
+       }
+          int count=0;
+        Set<Integer> set=new HashSet<>();//to find unique freq if any duplicate decrease it and increase count 
+       for(char c:map.keySet()){
+          int fre=map.get(c);
+           if(!set.contains(fre))set.add(fre);
+           else{ 
+               while(fre>0 && set.contains(fre)){
+                   fre--;
+                   count++;//it gives no.of char to be deleted
+               }
+               set.add(fre);
+           }
+           
+       }
+        return count;
+    }
+}
