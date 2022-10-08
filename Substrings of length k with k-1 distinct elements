@@ -1,0 +1,31 @@
+class Solution {
+    static int countOfSubstrings(String S, int K) {
+     int count=0;
+    //  for(int i=0;i<S.length();i++){
+    //      Set<Character> set=new HashSet<>();
+    //      for(int j=i+1;j<S.length();j++){
+    //          set.add(S.charAt(j));
+    //         String a= S.substring(i,j);
+    //         if(a.length()==K && set.size()==K-1){
+    //             count++;
+    //         }} }  
+  int i=0,j=0;    //sliding window
+  Map<Character,Integer> map=new HashMap<>();
+  while(j<S.length()){
+      if(j-i+1<=K){//searching for required length -->window
+          map.put(S.charAt(j),map.getOrDefault(S.charAt(j),0)+1);
+          j++;
+      }else{//found window check for condition
+          if(map.size()==K-1){
+              count++;
+          }
+ map.put(S.charAt(i),map.get(S.charAt(i))-1);//for next substring remove one character at start
+          if(map.get(S.charAt(i))==0){
+              map.remove(S.charAt(i));
+          }
+          i++;
+      }
+  }      if(map.size()==K-1){   count++; }
+  return count;
+    }
+};
