@@ -1,0 +1,36 @@
+class Solution {
+    public String addStrings(String X, String Y) {
+         int x1=X.length()-1;//pointer starting from end of each string
+         int y1=Y.length()-1;
+       String ans="";int sum=0;int carry=0;//intially sum,carry is zero
+       while(x1>=0 && y1>=0){
+           sum=carry+(X.charAt(x1)-'0')+(Y.charAt(y1)-'0');//sum=carry+numbers at last if each string
+           carry=sum/10;
+           char ch=(char)(sum%10+'0');//sum%10 gives last digit
+           ans=ans+ch;
+           x1--;y1--;
+       }
+       while(x1>=0){//if any numbers left in string X
+           sum=carry+(X.charAt(x1)-'0');
+           carry=sum/10;
+           char ch=(char)(sum%10+'0');
+          ans= ans+ch;
+           x1--;
+       }
+       while(y1>=0){//if any numbers left in Y string 
+           sum=carry+(Y.charAt(y1)-'0');
+           carry=sum/10;
+           char ch=(char)(sum%10+'0');
+           ans=ans+ch;
+           y1--;
+       }
+       if(carry!=0){//if any carry left 
+           char ch=(char)(carry+'0');
+           ans=ans+ch;
+       }
+      
+   StringBuilder sb=new StringBuilder(ans);//we are reversing the answer as we are doing it from last storing it  from first we get our answer in reverse
+   ans=sb.reverse().toString();
+        return ans;
+    }
+}
