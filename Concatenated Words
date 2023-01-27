@@ -1,0 +1,33 @@
+class Solution {
+    public List<String> findAllConcatenatedWordsInADict(String[] words) {
+        List<String> ans=new ArrayList<String>();
+        Set<String> set=new HashSet<>();
+        for(int i=0;i<words.length;i++){
+            set.add(words[i]);
+        }
+        for(int i=0;i<words.length;i++){
+            if(isConcatenated(words[i],set)){
+                ans.add(words[i]);
+            }
+        }
+        return ans;
+    }
+    boolean isConcatenated(String word,Set<String> set){
+        //find all possible prefix,suffix for each word
+        //case-1  if both present in set   --> return true
+        //case-2  if prefix present and suffix is not directly present(call same function) 
+        //call the same function for sufix
+        for(int i=0;i<word.length();i++){
+            String prefix=word.substring(0,i+1);
+            String suffix=word.substring(i+1);
+            if(set.contains(prefix) && set.contains(suffix)){
+                return true;
+            }else{
+                if(set.contains(prefix) && isConcatenated(suffix,set) ){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
