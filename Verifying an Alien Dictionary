@@ -1,0 +1,42 @@
+class Solution {
+    public boolean isAlienSorted(String[] words, String order) {
+       Map<Character,Integer> map=new HashMap<>();
+
+       //store position of character in order string
+
+       for(int i=0;i<order.length();i++){
+          map.put(order.charAt(i),i);
+       }
+         for(int i=0;i<words.length-1;i++){
+           //each time take two words and compare whether they are  lexicographically  sorted according
+           //to alien language (order)
+           String w1=words[i];
+           String w2=words[i+1];
+
+             int n=Math.min(w1.length(),w2.length());//min length 
+
+             for(int j=0;j<n;j++){
+                 if(map.get(w1.charAt(j)) < map.get(w2.charAt(j))){
+                 //if character of secound word is greater
+                 //which means  lexicographically  sorted so break and return true
+                    break;
+                 }
+                 //1 st character is greater which violates sorted rule 
+
+                 else if(map.get(w1.charAt(j))> map.get(w2.charAt(j))){
+                     return false;
+                 }
+                  //reached end of smaller string check whether which one is  smaller 
+                 //if 2nd is of smaller size  
+                 //then it is not sorted return false
+        
+                 else if(j==n-1 && w1.length()>w2.length()){
+                     return false;
+                 }
+             }
+
+       }
+       return true;
+     
+    }
+}
