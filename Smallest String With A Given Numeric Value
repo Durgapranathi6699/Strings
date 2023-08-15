@@ -1,0 +1,21 @@
+class Solution {
+    public String getSmallestString(int n, int k) {
+        char c[]=new char[n];
+        Arrays.fill(c,'a');
+        k=k-n;
+      
+       //aaa....(n times)
+       //start replcing with greater value so that least values stays at first
+       
+       int i=c.length-1;
+       while(k!=0){
+          int t=Math.min(25,k);//not 26 (as we have filled with a)
+          c[i]=(char)(t+'a');
+          k=k-t;
+          i--;
+
+       }
+       return String.valueOf(c);
+    }
+   
+}
