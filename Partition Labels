@@ -1,0 +1,21 @@
+class Solution {
+    public List<Integer> partitionLabels(String s) {
+        int start_index=0;
+        Map<Character,Integer> map=new HashMap<>();//integer,last_ocuuring_index
+        for(int i=0;i<s.length();i++){
+            map.put(s.charAt(i),i);
+        }
+        List<Integer> ans=new ArrayList<>();
+        int max=0;
+        int start=0;
+        for(int i=0;i<s.length();i++){
+               max=Math.max(max,map.get(s.charAt(i)));
+            if(i==max){
+                ans.add(max-start+1);
+                start=max+1;
+            }
+         
+        }
+        return ans;
+    }
+}
